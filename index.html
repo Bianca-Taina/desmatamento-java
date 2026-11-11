@@ -3,59 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoMonitor - Dashboard Ambiental</title>
+  <title>EcoMapeamento - Arborização Urbana</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Biblioteca Chart.js para os gráficos -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
   <header>
-    <h1>EcoMonitor 🍃</h1>
-    <p>Painel de Monitoramento e Indicadores Ambientais</p>
+    <h1>🌳 EcoMapeamento</h1>
+    <p>Gestão e Monitoramento de Árvores Urbanas</p>
   </header>
 
   <main class="container">
-    
-    <!-- Seção do Dashboard de Gráficos -->
-    <section class="card">
-      <h2>Evolução do Desmatamento</h2>
-      <div class="chart-container">
-        <canvas id="graficoDesmatamento"></canvas>
+
+    <!-- Indicadores no Topo -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <h3>Total Cadastrado</h3>
+        <p id="totalArvores">0</p>
+      </div>
+      <div class="kpi-card alerta">
+        <h3>Risco de Queda</h3>
+        <p id="totalRisco">0</p>
+      </div>
+      <div class="kpi-card sucesso">
+        <h3>Saudáveis</h3>
+        <p id="totalSaudaveis">0</p>
       </div>
     </section>
 
-    <!-- Seção do Simulador de Impacto -->
-    <section class="card">
-      <h2>Simulador de Impacto Ambiental</h2>
-      <p>Digite a área desmatada para calcular o impacto estimado:</p>
+    <div class="main-layout">
       
-      <div class="form-group">
-        <label for="areaInput">Área desmatada (em m²):</label>
-        <input type="number" id="areaInput" placeholder="Ex: 5000" min="1">
-        <button id="btnCalcular">Calcular Impacto</button>
-      </div>
+      <!-- Formulário de Cadastro -->
+      <section class="card form-card">
+        <h2>Cadastrar Nova Árvore</h2>
+        <form id="treeForm">
+          <div class="form-group">
+            <label for="rua">Nome da Rua / Av:</label>
+            <input type="text" id="rua" placeholder="Ex: Av. Brasil" required>
+          </div>
 
-      <!-- Resultados do Cálculo -->
-      <div id="resultados" class="resultados-grid hidden">
-        <div class="res-box">
-          <h3>🌳 Árvores Perdidas</h3>
-          <p id="resArvores">0</p>
+          <div class="form-group">
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" placeholder="Ex: Centro" required>
+          </div>
+
+          <div class="form-group">
+            <label for="especie">Espécie:</label>
+            <select id="especie">
+              <option value="Ipê Amarelo">Ipê Amarelo</option>
+              <option value="Ipê Roxo">Ipê Roxo</option>
+              <option value="Sibipiruna">Sibipiruna</option>
+              <option value="Jacarandá">Jacarandá</option>
+              <option value="Oiti">Oiti</option>
+              <option value="Outra">Outra</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="saude">Estado de Saúde:</label>
+            <select id="saude">
+              <option value="Saudável">Saudável</option>
+              <option value="Necessita Poda">Necessita Poda</option>
+              <option value="Risco de Queda">Risco de Queda</option>
+              <option value="Em Tratamento">Em Tratamento</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="idade">Idade Estimada (Anos):</label>
+            <input type="number" id="idade" value="1" min="1" max="200" required>
+          </div>
+
+          <button type="submit" id="btnSalvar">Adicionar Árvore</button>
+        </form>
+      </section>
+
+      <!-- Tabela e Filtros -->
+      <section class="card table-card">
+        <div class="table-header">
+          <h2>Árvores Mapeadas</h2>
+          <input type="text" id="busca" placeholder="🔍 Buscar por rua ou bairro...">
         </div>
-        <div class="res-box">
-          <h3>💨 Emissão de CO₂</h3>
-          <p id="resCo2">0 kg/ano</p>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Rua</th>
+                <th>Bairro</th>
+                <th>Espécie</th>
+                <th>Saúde</th>
+                <th>Idade</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaCorpo">
+              <!-- Inserido dinamicamente pelo JavaScript -->
+            </tbody>
+          </table>
         </div>
-        <div class="res-box">
-          <h3>🌬️ Oxigênio Perdido</h3>
-          <p id="resO2">0 kg/ano</p>
-        </div>
-        <div class="res-box destaque">
-          <h3>🌱 Árvores a Plantar</h3>
-          <p id="resCompensacao">0</p>
-        </div>
-      </div>
-    </section>
+      </section>
+
+    </div>
 
   </main>
 

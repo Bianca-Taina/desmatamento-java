@@ -1,123 +1,273 @@
+/* --- RESET E CONFIGURAÇÕES GERAIS --- */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
 }
 
 body {
-  background-color: #f4f7f6;
-  color: #333;
-  padding-bottom: 40px;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  padding-bottom: 50px;
 }
 
+/* --- CABEÇALHO MODERNO --- */
 header {
-  background-color: #1b4332;
+  background: linear-gradient(135deg, #111827 0%, #064e3b 50%, #047857 100%);
   color: #ffffff;
   text-align: center;
-  padding: 30px 15px;
+  padding: 40px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 header h1 {
-  font-size: 2rem;
-  margin-bottom: 5px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
 }
 
+header p {
+  color: #a7f3d0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* --- CONTAINER PRINCIPAL --- */
 .container {
-  max-width: 900px;
+  max-width: 1140px;
   margin: 30px auto;
-  padding: 0 15px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 24px;
+}
+
+/* --- CARDS DE INDICADORES (KPIs) --- */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.kpi-card {
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 12px;
+  border-left: 6px solid #059669;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+}
+
+.kpi-card.alerta {
+  border-left-color: #ef4444;
+}
+
+.kpi-card.sucesso {
+  border-left-color: #10b981;
+}
+
+.kpi-card h3 {
+  font-size: 0.8rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.kpi-card p {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #111827;
+  margin-top: 6px;
+}
+
+/* --- LAYOUT PRINCIPAL (FORM + TABELA) --- */
+.main-layout {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
 }
 
 .card {
   background: #ffffff;
-  border-radius: 10px;
-  padding: 25px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 26px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
-.card h2 {
-  color: #2d6a4f;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #e9ecef;
-  padding-bottom: 8px;
-}
-
-.chart-container {
-  position: relative;
-  width: 100%;
-  max-height: 400px;
-}
-
-.form-group {
-  display: flex;
-  gap: 10px;
-  margin: 20px 0;
-  flex-wrap: wrap;
-}
-
-.form-group label {
-  width: 100%;
-  font-weight: 600;
-}
-
-input[type="number"] {
+.form-card {
   flex: 1;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
+  min-width: 320px;
 }
 
-button {
-  background-color: #40916c;
+.table-card {
+  flex: 2;
+  min-width: 420px;
+}
+
+h2 {
+  color: #065f46;
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-bottom: 2px solid #ecfdf5;
+  padding-bottom: 10px;
+}
+
+/* --- FORMULÁRIO ESTILIZADO --- */
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #374151;
+}
+
+input, select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: #f9fafb;
+  color: #111827;
+  transition: all 0.2s ease;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #059669;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+}
+
+button[type="submit"] {
+  width: 100%;
+  background-color: #059669;
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-weight: bold;
+  padding: 13px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  margin-top: 10px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
 }
 
-button:hover {
-  background-color: #2d6a4f;
+button[type="submit"]:hover {
+  background-color: #047857;
+  transform: translateY(-1px);
 }
 
-.resultados-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-  margin-top: 20px;
+button[type="submit"]:active {
+  transform: translateY(0);
 }
 
-.hidden {
-  display: none;
+/* --- CABEÇALHO DA TABELA E BUSCA --- */
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
-.res-box {
-  background-color: #f8f9fa;
-  border-left: 4px solid #52b788;
-  padding: 15px;
+.table-header h2 {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+#busca {
+  width: 260px;
+}
+
+/* --- TABELA MODERNA --- */
+.table-responsive {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #f3f4f6;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.92rem;
+}
+
+th {
+  background-color: #f9fafb;
+  color: #4b5563;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+tr:hover td {
+  background-color: #f9fafb;
+}
+
+/* --- BADGES (TAGS DE SAÚDE) --- */
+.badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.badge-saudavel { 
+  background: #d1fae5; 
+  color: #065f46; 
+}
+.badge-poda { 
+  background: #fef3c7; 
+  color: #92400e; 
+}
+.badge-risco { 
+  background: #fee2e2; 
+  color: #991b1b; 
+}
+.badge-tratamento { 
+  background: #e0f2fe; 
+  color: #075985; 
+}
+
+/* --- BOTÃO DE EXCLUIR --- */
+.btn-excluir {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 7px 12px;
   border-radius: 6px;
+  cursor: pointer;
+  width: auto;
+  margin-top: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
 }
 
-.res-box.destaque {
-  background-color: #d8f3dc;
-  border-left-color: #1b4332;
-}
-
-.res-box h3 {
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 5px;
-}
-
-.res-box p {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #1b4332;
+.btn-excluir:hover {
+  background: #dc2626;
 }

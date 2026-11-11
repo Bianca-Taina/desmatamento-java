@@ -1,55 +1,95 @@
-// 1. Inicialização do Gráfico com Chart.js
-const ctx = document.getElementById('graficoDesmatamento').getContext('2d');
+// Array para armazenar as árvores
+let arvores = [
+  { id: 1, rua: 'Av. Brasil', bairro: 'Centro', especie: 'Ipê Amarelo', saude: 'Saudável', idade: 15 },
+  { id: 2, rua: 'Rua das Flores', bairro: 'Jardim América', especie: 'Sibipiruna', saude: 'Risco de Queda', idade: 35 }
+];
 
-const grafico = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'],
-    datasets: [{
-      label: 'Área Desmatada (m²)',
-      data: [12000, 19000, 15000, 22000, 18000, 25000, 21000],
-      borderColor: '#d90429',
-      backgroundColor: 'rgba(217, 4, 41, 0.1)',
-      borderWidth: 2,
-      fill: true,
-      tension: 0.3
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      }
-    }
-  }
+const form = document.getElementById('treeForm');
+const tabelaCorpo = document.getElementById('tabelaCorpo');
+const campoBusca = document.getElementById('busca');
+
+// Inicializa a tela
+document.addEventListener('DOMContentLoaded', () => {
+  renderizarTabela();
+  atualizarIndicadores();
 });
 
-// 2. Lógica do Simulador de Impacto
-const areaInput = document.getElementById('areaInput');
-const btnCalcular = document.getElementById('btnCalcular');
-const resultadosDiv = document.getElementById('resultados');
+// Evento de envio do formulário
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-btnCalcular.addEventListener('click', function () {
-  const area = parseFloat(areaInput.value);
+  const novaArvore = {
+    id: Date.now(),
+    rua: document.getElementById('rua').value.trim(),
+    bairro: document.getElementById('bairro').value.trim(),
+    especie: document.getElementById('especie').value,
+    saude: document.getElementById('saude').value,
+    idade: parseInt(document.getElementById('idade').value)
+  };
 
-  if (isNaN(area) || area <= 0) {
-    alert('Por favor, digite um valor de área válido!');
-    return;
-  }
-
-  // Fórmulas ambientais estimadas:
-  const arvoresPerdidas = Math.round(area * 0.1); // ~1 árvore a cada 10m²
-  const co2Emitido = Math.round(arvoresPerdidas * 22); // 22kg de CO2 por árvore/ano
-  const o2Perdido = Math.round(arvoresPerdidas * 118); // 118kg de O2 por árvore/ano
-  const compensacao = Math.round(arvoresPerdidas * 1.2); // +20% de margem
-
-  // Atualiza os valores na tela com formatação numérica
-  document.getElementById('resArvores').innerText = arvoresPerdidas.toLocaleString('pt-BR');
-  document.getElementById('resCo2').innerText = co2Emitido.toLocaleString('pt-BR') + ' kg/ano';
-  document.getElementById('resO2').innerText = o2Perdido.toLocaleString('pt-BR') + ' kg/ano';
-  document.getElementById('resCompensacao').innerText = compensacao.toLocaleString('pt-BR') + ' mudas';
-
-  // Exibe o painel de resultados
-  resultadosDiv.classList.remove('hidden');
+  arvores.push(novaArvore);
+  renderizarTabela();
+  atualizarIndicadores();
+  form.reset();
+  document.getElementById('idade').value = 1;
 });
+
+// Evento de busca em tempo real
+campoBusca.addEventListener('input', () => {
+  renderizarTabela();
+});
+
+// Função para renderizar a tabela
+function renderizarTabela() {
+  const termo = campoBusca.value.toLowerCase();
+  tabelaCorpo.innerHTML = '';
+
+  const arvoresFiltradas = arvores.filter(a => 
+    a.rua.toLowerCase().includes(termo) || 
+    a.bairro.toLowerCase().includes(termo)
+  );
+
+  arvoresFiltradas.forEach(arvore => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${arvore.rua}</td>
+      <td>${arvore.bairro}</td>
+      <td>${arvore.especie}</td>
+      <td><span class="badge ${obterClasseBadge(arvore.saude)}">${arvore.saude}</span></td>
+      <td>${arvore.idade} anos</td>
+      <td>
+        <button class="btn-excluir" onclick="removerArvore(${arvore.id})">Remover</button>
+      </td>
+    `;
+    tabelaCorpo.appendChild(tr);
+  });
+}
+
+// Retorna a classe visual para a badge do estado de saúde
+function obterClasseBadge(saude) {
+  switch (saude) {
+    case 'Saudável': return 'badge-saudavel';
+    case 'Necessita Poda': return 'badge-poda';
+    case 'Risco de Queda': return 'badge-risco';
+    case 'Em Tratamento': return 'badge-tratamento';
+    default: return '';
+  }
+}
+
+// Remover registro
+function removerArvore(id) {
+  arvores = arvores.filter(a => a.id !== id);
+  renderizarTabela();
+  atualizarIndicadores();
+}
+
+// Atualiza as estatísticas no topo da página
+function atualizarIndicadores() {
+  const total = arvores.length;
+  const risco = arvores.filter(a => a.saude === 'Risco de Queda').length;
+  const saudaveis = arvores.filter(a => a.saude === 'Saudável').length;
+
+  document.getElementById('totalArvores').innerText = total;
+  document.getElementById('totalRisco').innerText = risco;
+  document.getElementById('totalSaudaveis').innerText = saudaveis;
+}
