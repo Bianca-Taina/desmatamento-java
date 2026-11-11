@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoMonitor - Dashboard Ambiental</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Biblioteca Chart.js para os gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1>EcoMonitor 🍃</h1>
+    <p>Painel de Monitoramento e Indicadores Ambientais</p>
+  </header>
+
+  <main class="container">
+    
+    <!-- Seção do Dashboard de Gráficos -->
+    <section class="card">
+      <h2>Evolução do Desmatamento</h2>
+      <div class="chart-container">
+        <canvas id="graficoDesmatamento"></canvas>
+      </div>
+    </section>
+
+    <!-- Seção do Simulador de Impacto -->
+    <section class="card">
+      <h2>Simulador de Impacto Ambiental</h2>
+      <p>Digite a área desmatada para calcular o impacto estimado:</p>
+      
+      <div class="form-group">
+        <label for="areaInput">Área desmatada (em m²):</label>
+        <input type="number" id="areaInput" placeholder="Ex: 5000" min="1">
+        <button id="btnCalcular">Calcular Impacto</button>
+      </div>
+
+      <!-- Resultados do Cálculo -->
+      <div id="resultados" class="resultados-grid hidden">
+        <div class="res-box">
+          <h3>🌳 Árvores Perdidas</h3>
+          <p id="resArvores">0</p>
+        </div>
+        <div class="res-box">
+          <h3>💨 Emissão de CO₂</h3>
+          <p id="resCo2">0 kg/ano</p>
+        </div>
+        <div class="res-box">
+          <h3>🌬️ Oxigênio Perdido</h3>
+          <p id="resO2">0 kg/ano</p>
+        </div>
+        <div class="res-box destaque">
+          <h3>🌱 Árvores a Plantar</h3>
+          <p id="resCompensacao">0</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
