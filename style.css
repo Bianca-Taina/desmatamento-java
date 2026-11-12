@@ -14,30 +14,29 @@ body {
 
 /* --- CABEÇALHO MODERNO --- */
 header {
-  background: linear-gradient(135deg, #111827 0%, #064e3b 50%, #047857 100%);
+  background: linear-gradient(135deg, #064e3b 0%, #047857 60%, #10b981 100%);
   color: #ffffff;
   text-align: center;
-  padding: 40px 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 36px 20px;
+  box-shadow: 0 4px 20px rgba(6, 78, 59, 0.2);
 }
 
 header h1 {
   font-size: 2.2rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.5px;
   margin-bottom: 6px;
 }
 
 header p {
-  color: #a7f3d0;
+  color: #d1fae5;
   font-size: 1rem;
-  font-weight: 400;
 }
 
 /* --- CONTAINER PRINCIPAL --- */
 .container {
-  max-width: 1140px;
-  margin: 30px auto;
+  max-width: 1200px;
+  margin: 28px auto;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
@@ -47,16 +46,16 @@ header p {
 /* --- CARDS DE INDICADORES (KPIs) --- */
 .kpi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
 }
 
 .kpi-card {
   background: #ffffff;
-  padding: 22px;
+  padding: 20px 22px;
   border-radius: 12px;
-  border-left: 6px solid #059669;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border-left: 6px solid #047857;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -65,78 +64,87 @@ header p {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
 }
 
-.kpi-card.alerta {
-  border-left-color: #ef4444;
-}
-
-.kpi-card.sucesso {
-  border-left-color: #10b981;
-}
+.kpi-card.sucesso { border-left-color: #10b981; }
+.kpi-card.aviso { border-left-color: #f59e0b; }
+.kpi-card.alerta { border-left-color: #ef4444; }
 
 .kpi-card h3 {
   font-size: 0.8rem;
   color: #6b7280;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .kpi-card p {
-  font-size: 2.2rem;
+  font-size: 2.1rem;
   font-weight: 800;
   color: #111827;
   margin-top: 6px;
 }
 
-/* --- LAYOUT PRINCIPAL (FORM + TABELA) --- */
+/* --- LAYOUT PRINCIPAL --- */
 .main-layout {
   display: flex;
   gap: 24px;
+  align-items: flex-start;
   flex-wrap: wrap;
+}
+
+.left-column {
+  flex: 1;
+  min-width: 330px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .card {
   background: #ffffff;
   border-radius: 12px;
-  padding: 26px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-}
-
-.form-card {
-  flex: 1;
-  min-width: 320px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .table-card {
-  flex: 2;
-  min-width: 420px;
+  flex: 1.8;
+  min-width: 450px;
 }
 
 h2 {
   color: #065f46;
-  margin-bottom: 20px;
-  font-size: 1.25rem;
+  margin-bottom: 18px;
+  font-size: 1.2rem;
   font-weight: 700;
   border-bottom: 2px solid #ecfdf5;
   padding-bottom: 10px;
 }
 
-/* --- FORMULÁRIO ESTILIZADO --- */
+/* --- FORMULÁRIO --- */
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
 .form-group {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 label {
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: #374151;
 }
 
 input, select {
   width: 100%;
-  padding: 11px 14px;
+  padding: 10px 12px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 0.95rem;
@@ -162,7 +170,7 @@ button[type="submit"] {
   font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 6px;
   transition: background-color 0.2s ease, transform 0.1s ease;
   box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
 }
@@ -172,34 +180,37 @@ button[type="submit"]:hover {
   transform: translateY(-1px);
 }
 
-button[type="submit"]:active {
-  transform: translateY(0);
+/* --- GRÁFICO --- */
+.canvas-wrapper {
+  position: relative;
+  max-width: 280px;
+  margin: 0 auto;
 }
 
-/* --- CABEÇALHO DA TABELA E BUSCA --- */
+/* --- TABELA E BUSCA --- */
 .table-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #ecfdf5;
+  padding-bottom: 12px;
 }
 
 .table-header h2 {
   margin-bottom: 0;
   border-bottom: none;
+  padding-bottom: 0;
 }
 
 #busca {
   width: 260px;
 }
 
-/* --- TABELA MODERNA --- */
 .table-responsive {
   overflow-x: auto;
-  border-radius: 8px;
-  border: 1px solid #f3f4f6;
 }
 
 table {
@@ -209,7 +220,7 @@ table {
 
 th, td {
   text-align: left;
-  padding: 14px 16px;
+  padding: 14px 12px;
   border-bottom: 1px solid #e5e7eb;
   font-size: 0.92rem;
 }
@@ -217,7 +228,7 @@ th, td {
 th {
   background-color: #f9fafb;
   color: #4b5563;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 0.5px;
@@ -227,7 +238,18 @@ tr:hover td {
   background-color: #f9fafb;
 }
 
-/* --- BADGES (TAGS DE SAÚDE) --- */
+.local-rua {
+  font-weight: 600;
+  color: #111827;
+  display: block;
+}
+
+.local-bairro {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* --- BADGES --- */
 .badge {
   padding: 5px 12px;
   border-radius: 20px;
@@ -236,38 +258,36 @@ tr:hover td {
   display: inline-block;
 }
 
-.badge-saudavel { 
-  background: #d1fae5; 
-  color: #065f46; 
-}
-.badge-poda { 
-  background: #fef3c7; 
-  color: #92400e; 
-}
-.badge-risco { 
-  background: #fee2e2; 
-  color: #991b1b; 
-}
-.badge-tratamento { 
-  background: #e0f2fe; 
-  color: #075985; 
-}
+.badge-saudavel { background: #d1fae5; color: #065f46; }
+.badge-poda { background: #fef3c7; color: #92400e; }
+.badge-risco { background: #fee2e2; color: #991b1b; }
+.badge-tratamento { background: #e0f2fe; color: #075985; }
 
 /* --- BOTÃO DE EXCLUIR --- */
 .btn-excluir {
-  background: #ef4444;
-  color: white;
+  background: #fee2e2;
+  color: #b91c1c;
   border: none;
-  padding: 7px 12px;
+  padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
-  width: auto;
-  margin-top: 0;
   font-size: 0.8rem;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
+  font-weight: 700;
+  transition: all 0.2s ease;
 }
 
 .btn-excluir:hover {
-  background: #dc2626;
+  background: #ef4444;
+  color: white;
+}
+
+.empty-msg {
+  text-align: center;
+  padding: 25px;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.hidden {
+  display: none;
 }

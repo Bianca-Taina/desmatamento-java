@@ -11,7 +11,7 @@
 
   <header>
     <h1>🌳 EcoMapeamento</h1>
-    <p>Gestão e Monitoramento de Árvores Urbanas</p>
+    <p>Gestão e Monitoramento Inteligente de Árvores Urbanas</p>
   </header>
 
   <main class="container">
@@ -19,79 +19,97 @@
     <!-- Indicadores no Topo -->
     <section class="kpi-grid">
       <div class="kpi-card">
-        <h3>Total Cadastrado</h3>
+        <h3>🌲 Total Cadastrado</h3>
         <p id="totalArvores">0</p>
       </div>
-      <div class="kpi-card alerta">
-        <h3>Risco de Queda</h3>
-        <p id="totalRisco">0</p>
-      </div>
       <div class="kpi-card sucesso">
-        <h3>Saudáveis</h3>
+        <h3>✅ Saudáveis</h3>
         <p id="totalSaudaveis">0</p>
+      </div>
+      <div class="kpi-card aviso">
+        <h3>✂️ Necessita Poda</h3>
+        <p id="totalPoda">0</p>
+      </div>
+      <div class="kpi-card alerta">
+        <h3>⚠️ Risco de Queda</h3>
+        <p id="totalRisco">0</p>
       </div>
     </section>
 
     <div class="main-layout">
       
-      <!-- Formulário de Cadastro -->
-      <section class="card form-card">
-        <h2>Cadastrar Nova Árvore</h2>
-        <form id="treeForm">
-          <div class="form-group">
-            <label for="rua">Nome da Rua / Av:</label>
-            <input type="text" id="rua" placeholder="Ex: Av. Brasil" required>
+      <!-- Coluna Esquerda: Formulário + Gráfico -->
+      <div class="left-column">
+        
+        <!-- Formulário de Cadastro -->
+        <section class="card">
+          <h2>Cadastrar Nova Árvore</h2>
+          <form id="treeForm">
+            <div class="form-group">
+              <label for="rua">Nome da Rua / Av:</label>
+              <input type="text" id="rua" placeholder="Ex: Av. Brasil" required>
+            </div>
+
+            <div class="form-group">
+              <label for="bairro">Bairro:</label>
+              <input type="text" id="bairro" placeholder="Ex: Centro" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="especie">Espécie:</label>
+                <select id="especie">
+                  <option value="Ipê Amarelo">Ipê Amarelo</option>
+                  <option value="Ipê Roxo">Ipê Roxo</option>
+                  <option value="Sibipiruna">Sibipiruna</option>
+                  <option value="Jacarandá">Jacarandá</option>
+                  <option value="Oiti">Oiti</option>
+                  <option value="Outra">Outra</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="idade">Idade (Anos):</label>
+                <input type="number" id="idade" value="1" min="1" max="200" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="saude">Estado de Saúde:</label>
+              <select id="saude">
+                <option value="Saudável">Saudável</option>
+                <option value="Necessita Poda">Necessita Poda</option>
+                <option value="Risco de Queda">Risco de Queda</option>
+                <option value="Em Tratamento">Em Tratamento</option>
+              </select>
+            </div>
+
+            <button type="submit" id="btnSalvar">+ Adicionar Árvore</button>
+          </form>
+        </section>
+
+        <!-- Gráfico Dinâmico -->
+        <section class="card chart-card">
+          <h2>Panorama de Saúde</h2>
+          <div class="canvas-wrapper">
+            <canvas id="graficoSaude"></canvas>
           </div>
+        </section>
 
-          <div class="form-group">
-            <label for="bairro">Bairro:</label>
-            <input type="text" id="bairro" placeholder="Ex: Centro" required>
-          </div>
+      </div>
 
-          <div class="form-group">
-            <label for="especie">Espécie:</label>
-            <select id="especie">
-              <option value="Ipê Amarelo">Ipê Amarelo</option>
-              <option value="Ipê Roxo">Ipê Roxo</option>
-              <option value="Sibipiruna">Sibipiruna</option>
-              <option value="Jacarandá">Jacarandá</option>
-              <option value="Oiti">Oiti</option>
-              <option value="Outra">Outra</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="saude">Estado de Saúde:</label>
-            <select id="saude">
-              <option value="Saudável">Saudável</option>
-              <option value="Necessita Poda">Necessita Poda</option>
-              <option value="Risco de Queda">Risco de Queda</option>
-              <option value="Em Tratamento">Em Tratamento</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="idade">Idade Estimada (Anos):</label>
-            <input type="number" id="idade" value="1" min="1" max="200" required>
-          </div>
-
-          <button type="submit" id="btnSalvar">Adicionar Árvore</button>
-        </form>
-      </section>
-
-      <!-- Tabela e Filtros -->
+      <!-- Coluna Direita: Tabela e Filtros -->
       <section class="card table-card">
         <div class="table-header">
           <h2>Árvores Mapeadas</h2>
-          <input type="text" id="busca" placeholder="🔍 Buscar por rua ou bairro...">
+          <input type="text" id="busca" placeholder="🔍 Buscar rua, bairro ou espécie...">
         </div>
 
         <div class="table-responsive">
           <table>
             <thead>
               <tr>
-                <th>Rua</th>
-                <th>Bairro</th>
+                <th>Localização</th>
                 <th>Espécie</th>
                 <th>Saúde</th>
                 <th>Idade</th>
@@ -102,6 +120,7 @@
               <!-- Inserido dinamicamente pelo JavaScript -->
             </tbody>
           </table>
+          <p id="mensagemVazia" class="empty-msg hidden">Nenhuma árvore encontrada para essa busca.</p>
         </div>
       </section>
 
