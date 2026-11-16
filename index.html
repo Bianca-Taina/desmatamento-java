@@ -16,7 +16,7 @@
                 <li><a href="#causas">Causas</a></li>
                 <li><a href="#consequencias">Consequências</a></li>
                 <li><a href="#solucoes">Soluções</a></li>
-                <li><a href="#quiz">Quiz</a></li>
+                <li><a href="#painel">Painel de Monitoramento</a></li>
             </ul>
         </nav>
     </header>
@@ -24,8 +24,8 @@
     <section id="inicio" class="hero">
         <div class="hero-content">
             <h1>Preservar as Florestas é Proteger o Nosso Futuro</h1>
-            <p>Entenda os impactos do desmatamento nos biomas brasileiros, especialmente na Amazônia e no Cerrado, e descubra como podemos reverter esse cenário.</p>
-            <a href="#causas" class="btn-primary">Explorar Conteúdo</a>
+            <p>Entenda os impactos do desmatamento nos biomas brasileiros e acompanhe os dados de monitoramento por satélite.</p>
+            <a href="#painel" class="btn-primary">Ver Painel de Monitoramento</a>
         </div>
     </section>
 
@@ -106,16 +106,47 @@
         </div>
     </section>
 
-    <section id="quiz" class="section bg-dark">
-        <div class="container quiz-container">
-            <h2 class="section-title text-white">Teste Seus Conhecimentos</h2>
-            <p class="section-subtitle text-light">Responda às perguntas abaixo para verificar o que você aprendeu.</p>
-            
-            <div id="quiz-box">
-                <h3 id="question-text">Carregando pergunta...</h3>
-                <div id="options-container" class="options-grid"></div>
-                <p id="feedback-text" class="feedback"></p>
-                <button id="next-btn" class="btn-primary hidden">Próxima Pergunta</button>
+    <!-- NOVA SEÇÃO: PAINEL DE MONITORAMENTO -->
+    <section id="painel" class="section bg-dark">
+        <div class="container">
+            <h2 class="section-title text-white">🛰️ Painel de Monitoramento de Desmatamento</h2>
+            <p class="section-subtitle text-light">Selecione um bioma para visualizar as áreas críticas, os principais vetores de pressão e acessar os mapas oficiais via satélite.</p>
+
+            <!-- Botões de Filtro por Bioma -->
+            <div class="filter-buttons" id="bioma-filters">
+                <button class="filter-btn active" data-bioma="todos">Todos os Biomas</button>
+                <button class="filter-btn" data-bioma="amazonia">Amazônia</button>
+                <button class="filter-btn" data-bioma="cerrado">Cerrado</button>
+                <button class="filter-btn" data-bioma="mata-atlantica">Mata Atlântica</button>
+                <button class="filter-btn" data-bioma="pantanal">Pantanal</button>
+                <button class="filter-btn" data-bioma="caatinga">Caatinga</button>
+            </div>
+
+            <!-- Cards Dinâmicos de Monitoramento -->
+            <div id="painel-grid" class="painel-grid"></div>
+
+            <!-- Plataformas Oficiais Online -->
+            <div class="plataformas-box">
+                <h3>🌐 Ferramentas Oficiais de Monitoramento Online</h3>
+                <p>Acompanhe alertas em tempo real, imagens de satélite de antes e depois e relatórios públicos diretamente nas fontes oficiais:</p>
+                <div class="plataformas-links">
+                    <a href="https://terrabrasilis.dpi.inpe.br/" target="_blank" rel="noopener noreferrer" class="plat-card">
+                        <strong>TerraBrasilis (INPE)</strong>
+                        <span>Painéis oficiais do governo brasileiro (DETER e PRODES) com mapas de alertas diários na Amazônia e Cerrado. ↗</span>
+                    </a>
+                    <a href="https://plataforma.alerta.mapbiomas.org/" target="_blank" rel="noopener noreferrer" class="plat-card">
+                        <strong>MapBiomas Alerta</strong>
+                        <span>Sistema com imagens de satélite de alta resolução mostrando o antes e depois de cada desmatamento no Brasil. ↗</span>
+                    </a>
+                    <a href="https://queimadas.dgi.inpe.br/queimadas/bdqueimadas" target="_blank" rel="noopener noreferrer" class="plat-card">
+                        <strong>BDQueimadas (INPE)</strong>
+                        <span>Mapa interativo com focos de calor e incêndios florestais detectados por satélites em tempo quase real. ↗</span>
+                    </a>
+                    <a href="https://www.globalforestwatch.org/map/" target="_blank" rel="noopener noreferrer" class="plat-card">
+                        <strong>Global Forest Watch</strong>
+                        <span>Plataforma global interativa com alertas semanais de perda de cobertura arbórea em qualquer lugar do mundo. ↗</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
