@@ -1,133 +1,129 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoMapeamento - Arborização Urbana</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerta Verde - O Desmatamento no Brasil</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
-    <h1>🌳 EcoMapeamento</h1>
-    <p>Gestão e Monitoramento Inteligente de Árvores Urbanas</p>
-  </header>
+    <header>
+        <nav class="navbar">
+            <div class="logo">🌿 Alerta Verde</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#causas">Causas</a></li>
+                <li><a href="#consequencias">Consequências</a></li>
+                <li><a href="#solucoes">Soluções</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <main class="container">
-
-    <!-- Indicadores no Topo -->
-    <section class="kpi-grid">
-      <div class="kpi-card">
-        <h3>🌲 Total Cadastrado</h3>
-        <p id="totalArvores">0</p>
-      </div>
-      <div class="kpi-card sucesso">
-        <h3>✅ Saudáveis</h3>
-        <p id="totalSaudaveis">0</p>
-      </div>
-      <div class="kpi-card aviso">
-        <h3>✂️ Necessita Poda</h3>
-        <p id="totalPoda">0</p>
-      </div>
-      <div class="kpi-card alerta">
-        <h3>⚠️ Risco de Queda</h3>
-        <p id="totalRisco">0</p>
-      </div>
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Preservar as Florestas é Proteger o Nosso Futuro</h1>
+            <p>Entenda os impactos do desmatamento nos biomas brasileiros, especialmente na Amazônia e no Cerrado, e descubra como podemos reverter esse cenário.</p>
+            <a href="#causas" class="btn-primary">Explorar Conteúdo</a>
+        </div>
     </section>
 
-    <div class="main-layout">
-      
-      <!-- Coluna Esquerda: Formulário + Gráfico -->
-      <div class="left-column">
-        
-        <!-- Formulário de Cadastro -->
-        <section class="card">
-          <h2>Cadastrar Nova Árvore</h2>
-          <form id="treeForm">
-            <div class="form-group">
-              <label for="rua">Nome da Rua / Av:</label>
-              <input type="text" id="rua" placeholder="Ex: Av. Brasil" required>
+    <section id="causas" class="section">
+        <div class="container">
+            <h2 class="section-title">Principais Causas</h2>
+            <p class="section-subtitle">Fatores que impulsionam a derrubada da vegetação nativa no país.</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🚜</div>
+                    <h3>Expansão Agropecuária</h3>
+                    <p>Abertura de grandes áreas para pastagens de gado e cultivo de monoculturas, como soja e milho, é o principal motor do desmatamento.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🪵</div>
+                    <h3>Extração Ilegal de Madeira</h3>
+                    <p>O corte não autorizado de árvores nobres degrada a floresta e abre estradas clandestinas que facilitam novas invasões.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📄</div>
+                    <h3>Grilagem de Terras</h3>
+                    <p>Ocupação ilegal de terras públicas para especulação imobiliária, onde a derrubada da mata serve para "marcar" posse.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⛏️</div>
+                    <h3>Garimpo e Mineração</h3>
+                    <p>A extração ilegal de minérios destrói a cobertura vegetal em áreas protegidas e contamina os rios com mercúrio.</p>
+                </div>
             </div>
-
-            <div class="form-group">
-              <label for="bairro">Bairro:</label>
-              <input type="text" id="bairro" placeholder="Ex: Centro" required>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="especie">Espécie:</label>
-                <select id="especie">
-                  <option value="Ipê Amarelo">Ipê Amarelo</option>
-                  <option value="Ipê Roxo">Ipê Roxo</option>
-                  <option value="Sibipiruna">Sibipiruna</option>
-                  <option value="Jacarandá">Jacarandá</option>
-                  <option value="Oiti">Oiti</option>
-                  <option value="Outra">Outra</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="idade">Idade (Anos):</label>
-                <input type="number" id="idade" value="1" min="1" max="200" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="saude">Estado de Saúde:</label>
-              <select id="saude">
-                <option value="Saudável">Saudável</option>
-                <option value="Necessita Poda">Necessita Poda</option>
-                <option value="Risco de Queda">Risco de Queda</option>
-                <option value="Em Tratamento">Em Tratamento</option>
-              </select>
-            </div>
-
-            <button type="submit" id="btnSalvar">+ Adicionar Árvore</button>
-          </form>
-        </section>
-
-        <!-- Gráfico Dinâmico -->
-        <section class="card chart-card">
-          <h2>Panorama de Saúde</h2>
-          <div class="canvas-wrapper">
-            <canvas id="graficoSaude"></canvas>
-          </div>
-        </section>
-
-      </div>
-
-      <!-- Coluna Direita: Tabela e Filtros -->
-      <section class="card table-card">
-        <div class="table-header">
-          <h2>Árvores Mapeadas</h2>
-          <input type="text" id="busca" placeholder="🔍 Buscar rua, bairro ou espécie...">
         </div>
+    </section>
 
-        <div class="table-responsive">
-          <table>
-            <thead>
-              <tr>
-                <th>Localização</th>
-                <th>Espécie</th>
-                <th>Saúde</th>
-                <th>Idade</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody id="tabelaCorpo">
-              <!-- Inserido dinamicamente pelo JavaScript -->
-            </tbody>
-          </table>
-          <p id="mensagemVazia" class="empty-msg hidden">Nenhuma árvore encontrada para essa busca.</p>
+    <section id="consequencias" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Consequências Ambientais e Sociais</h2>
+            <div class="info-list">
+                <div class="info-item">
+                    <h3>🌡️ Aquecimento Global</h3>
+                    <p>As florestas armazenam bilhões de toneladas de carbono. Quando derrubadas ou queimadas, liberam CO₂ na atmosfera, acelerando as mudanças climáticas.</p>
+                </div>
+                <div class="info-item">
+                    <h3>🌧️ Fim dos "Rios Voadores"</h3>
+                    <p>A Amazônia produz massas de umidade que levam chuvas para o Centro-Oeste, Sudeste e Sul. Sem árvores, o risco de secas severas e crises hídricas aumenta.</p>
+                </div>
+                <div class="info-item">
+                    <h3>🐆 Perda de Biodiversidade</h3>
+                    <p>A destruição dos habitats ameaça de extinção milhares de espécies de animais e plantas, muitas antes mesmo de serem estudadas pela ciência.</p>
+                </div>
+                <div class="info-item">
+                    <h3>🏹 Impacto nos Povos Tradicionais</h3>
+                    <p>Comunidades indígenas, quilombolas e ribeirinhas perdem seus territórios, fontes de sustento e sofrem com o avanço da violência no campo.</p>
+                </div>
+            </div>
         </div>
-      </section>
+    </section>
 
-    </div>
+    <section id="solucoes" class="section">
+        <div class="container">
+            <h2 class="section-title">Caminhos e Soluções</h2>
+            <div class="cards-grid">
+                <div class="card border-green">
+                    <h3>🛰️ Fiscalização por Satélite</h3>
+                    <p>Monitoramento em tempo real aliado à aplicação rigorosa de multas e embargos contra crimes ambientais.</p>
+                </div>
+                <div class="card border-green">
+                    <h3>🌱 Bioeconomia</h3>
+                    <p>Incentivo a atividades que geram lucro com a floresta em pé, como extração de açaí, castanha, óleos e ecoturismo.</p>
+                </div>
+                <div class="card border-green">
+                    <h3>🔍 Rastreabilidade</h3>
+                    <p>Garantir que produtos agropecuários não venham de áreas desmatadas ilegalmente, exigindo responsabilidade das empresas.</p>
+                </div>
+                <div class="card border-green">
+                    <h3>🌳 Reflorestamento</h3>
+                    <p>Projetos de restauração ecológica para recuperar áreas degradadas e proteger nascentes e matas ciliares.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  </main>
+    <section id="quiz" class="section bg-dark">
+        <div class="container quiz-container">
+            <h2 class="section-title text-white">Teste Seus Conhecimentos</h2>
+            <p class="section-subtitle text-light">Responda às perguntas abaixo para verificar o que você aprendeu.</p>
+            
+            <div id="quiz-box">
+                <h3 id="question-text">Carregando pergunta...</h3>
+                <div id="options-container" class="options-grid"></div>
+                <p id="feedback-text" class="feedback"></p>
+                <button id="next-btn" class="btn-primary hidden">Próxima Pergunta</button>
+            </div>
+        </div>
+    </section>
 
-  <script src="script.js"></script>
+    <footer>
+        <p>Desenvolvido para fins educacionais • Conscientização Ambiental 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
